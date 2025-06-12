@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Text.Json.Serialization;
 using CompanyEventAPI.Context;
+using CompanyEventAPI.Hubs;
 using CompanyEventAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -122,6 +123,20 @@ namespace CompanyEventAPI
             builder.Services.AddOpenApi();
 
 
+            // CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("https://localhost:7194") // Adreça client
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
+
+
+            builder.Services.AddSignalR();
 
             /*--------------*/
             var app = builder.Build();
@@ -148,8 +163,16 @@ namespace CompanyEventAPI
 
             //app.UseHttpsRedirection();
 
+            app.UseRouting();
+            app.UseStaticFiles();
+
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapRazorPages();
+
+            app.UseCors();
+            app.MapHub<ChatHub>("/chathub");
 
             app.MapControllers();
 
