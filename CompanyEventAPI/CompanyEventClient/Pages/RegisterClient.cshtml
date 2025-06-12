@@ -1,0 +1,51 @@
+﻿@page
+@model CompanyEventClient.Pages.RegisterClientModel
+@{
+}
+
+<h2>Registra un nou Client</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Client.Email"></label>
+        <input asp-for="Client.Email" type="email" class="form-control" />
+        <span asp-validation-for="Client.Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.Password"></label>
+        <input asp-for="Client.Password" class="form-control" />
+        <span asp-validation-for="Client.Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.Empresa"></label>
+        <input asp-for="Client.Empresa" class="form-control" />
+        <span asp-validation-for="Client.Empresa" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.NameCEO"></label>
+        <input asp-for="Client.NameCEO" class="form-control" />
+        <span asp-validation-for="Client.NameCEO" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.SurnameCEO"></label>
+        <input asp-for="Client.SurnameCEO" class="form-control" />
+        <span asp-validation-for="Client.SurnameCEO" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.NombreAssistents"></label>
+        <input asp-for="Client.NombreAssistents" type="number" class="form-control" />
+        <span asp-validation-for="Client.NombreAssistents" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Registrar</button>
+    <a asp-page="/Index" class="btn btn-secondary">Cancel·la</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

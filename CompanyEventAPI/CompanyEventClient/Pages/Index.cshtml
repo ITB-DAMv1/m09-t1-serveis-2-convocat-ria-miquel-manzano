@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    //Mirem si tenim sessio activa
+    var token = HttpContext.Session.GetString("AuthToken");
+    var loggedIn = Tools.TokenHelper.IsTokenSession(token);
+}
+
+<div class="text-center">
+    <h1 class="display-4">List of Clients</h1>
+</div>
+
+<div>
+    @if (!Model.Clients.Any())
+    {
+        <p>No s'han trobat Clients.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Company name</th>
+                    <th>Number of guests</th>
+                    <th>Vip</th>
+                    <th>Registration date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in Model.Clients)
+                {
+                    <tr>
+                        <td>@client.Empresa</td>
+                        <td>@client.NombreAssistents</td>
+                        <td>@client.Vip</td>
+                        <td>@client.DataRegistre</td>
+                            @if (loggedIn)
+                            {
+                                <td>
+                                    <form method="post" asp-page-handler="Delete" asp-route-id="@client.Id" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
+                                        <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                               </td>
+                               <td>
+                                <a asp-page="./EditClient" asp-route-id="@client.Id" title="Editar" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                               </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" disabled title="Només per usuaris autenticats">
+                                    <i class="bi bi-trash-fill"></i>
+                                    </button>
+                               </td>
+                            <td>
+                                <a asp-page="./EditClient" asp-route-id="@client.Id" disabled title="Només per usuaris autenticats" class="btn btn-sm btn-secondary"><i class="bi bi-pencil-fill"></i></a>
+                            </td>
+                            }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
