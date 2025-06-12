@@ -106,6 +106,52 @@ Totes dues:
 
 ---
 
+## Exercici 7: Documentació del Xat amb SignalR
+
+### 📸 Captura 1 - `ChatHub.cs`
+
+![Captura1](./Multimedia/Captura1.PNG)
+
+📌 Explicació:
+
+- **ChatHub** és el cor de la comunicació. Permet als clients enviar i rebre missatges.
+- **SendMessage()** és la funció que reben tots els clients connectats.
+- El format del missatge compleix el requisit: `[Data/hora] > [Nom Usuari]: [Missatge]`.
+
+
+### 📸 Captura 2 - `Program.cs` (Configuració de serveis)
+
+![Captura2](./Multimedia/Captura2.PNG)
+
+📌 Explicació:
+
+- La política **CorsPolicy** permet connexions des del client (React, etc.) ubicat en **localhost:3000**.
+- És necessari per evitar errors de connexió entre el client i servidor.
+- El **MapHub<ChatHub>** estableix el punt d'entrada de la connexió WebSocket per SignalR a **/chatHub**.
+
+
+### 📸 Captura 3 - `Chat.js` (client web)
+
+![Captura3](./Multimedia/Captura3.PNG)
+
+📌 Explicació:
+
+- Es crea la connexió amb el servidor a través de **/chatHub**.
+- **ReceiveMessage** és l’event que el servidor emet, i el client mostra a la interfície.
+
+
+### 📸 Captura 4 - Enviament del missatge des del client
+
+![Captura4](./Multimedia/Captura4.PNG)
+
+📌 Explicació:
+
+- Quan es fa clic a “Enviar”, s’obté l’usuari i missatge, i s’invoca **SendMessage()** del **ChatHub**.
+- Si la connexió falla, mostra error de connexió com es demana a l’enunciat.
+
+
+---
+
 ## Exercici 8 (Errors en codi i correcció)
 
 **Codi donat:**
