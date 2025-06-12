@@ -150,6 +150,10 @@ Totes dues:
 - Si la connexió falla, mostra error de connexió com es demana a l’enunciat.
 
 
+### Vídeo - Demostració del funcionament del xat
+
+[link drive](https://drive.google.com/file/d/1-8ei08YzoGSIiQsqJA2m5-ybrO2WDvj_/view?usp=sharing)
+
 ---
 
 ## Exercici 8 (Errors en codi i correcció)
